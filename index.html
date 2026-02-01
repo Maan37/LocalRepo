@@ -53,7 +53,7 @@
     .buttons {
       margin-top: 30px;
       position: relative;
-      height: 120px;
+      height: 140px;
     }
 
     button {
@@ -65,15 +65,11 @@
       transition: all 0.2s ease;
     }
 
-    #acceptBtn {
+    #acceptBtn, #confirmYesBtn {
       background: #ff4b5c;
       color: white;
       width: 100%;
       max-width: 260px;
-    }
-
-    #acceptBtn:active {
-      transform: scale(0.95);
     }
 
     #rejectBtn {
@@ -82,11 +78,15 @@
       color: #555;
       left: 50%;
       transform: translateX(-50%);
-      top: 60px;
+      top: 70px;
       white-space: nowrap;
     }
 
-    .final {
+    .hidden {
+      display: none;
+    }
+
+    .final, .confirm {
       display: none;
       animation: fadeIn 0.8s ease forwards;
     }
@@ -105,66 +105,102 @@
       0%,100% { transform: scale(1); }
       50% { transform: scale(1.2); }
     }
+
+    .plea {
+      margin-top: 10px;
+      font-size: 14px;
+      color: #ff4b5c;
+      font-weight: 500;
+    }
   </style>
 </head>
 
 <body>
-  <div class="card" id="card">
+  <div class="card">
+
+    <!-- MAIN SCREEN -->
     <div id="main">
       <h1>Hey Khushi ❤️</h1>
 
       <p>
         Mujhe pata h mai joke kr deta hu kabhi kabhi, but wo sirf tmhe khush krne ke liye bachha.
-        From next time i will take care ki kab tmhare sath rehna and sunna h rather than joking around, 
-        Mai hamesha tmhse pyaar krunga dont worry, I will always be there for you. Also remember,
-        <span class="highlight">how deeply I love you.</span>
+        From next time i will take care ki kab tmhare pyaar krna h and tmhe sunna h rather than joking around, 
+        Mai hamesha tmhse pyaar krunga dont worry, I will always be there for you. Also remember
+        <span class="highlight">HOW DEEPLY I LOVE YOU.</span>
       </p>
 
       <p>
         You’re my <b>Bubu</b>,  
         I’m your <b>BooBoo</b>,  
-        and my heart has been yours way before this page existed.
+        and my heart has been yours all along.
       </p>
 
       <p>
         I don’t want perfection.  
-        I want <b>you</b>.  
-        Every mood, every smile, every fight, every laugh.
+        I want <b>only My BUGLU, MY CUTU PUTU</b>.
       </p>
 
-      <h1>Will you stay with me? 🥺</h1>
+      <h1>RAHOGI NA MERE SATH? 🥺</h1>
 
       <div class="buttons">
         <button id="acceptBtn">Yes BooBoo 💖</button>
         <button id="rejectBtn">No 😤</button>
+        <div class="plea hidden" id="pleaMsg">
+          Please naa mat kro ab maan bhi jao,<br>
+          meri pyaari buglu 🥺<br>
+          I am your baby naaaa 💕
+        </div>
       </div>
     </div>
 
+    <!-- CONFIRMATION SCREEN -->
+    <div class="confirm" id="confirm">
+      <div class="heart">🥺</div>
+      <h1>Sach me? 😭</h1>
+      <p>
+        Sach me tmne mujhe maaf kr dia?  
+        Itne bade fight ke baad bhi?
+      </p>
+      <p class="highlight">
+        Ek baar phirse boldo na… 💔➡️❤️
+      </p>
+      <button id="confirmYesBtn">Haan BooBoo, Sach Me 💖</button>
+    </div>
+
+    <!-- FINAL SCREEN -->
     <div class="final" id="final">
       <div class="heart">💖</div>
       <h1>She said YES 😭</h1>
       <p>
         Thank you, my Bubu.  
-        I promise to annoy you, love you,  
-        and choose you — every single day.
+        I promise to learn, grow,  
+        and love you better every day.
       </p>
       <p class="highlight">
-        Forever yours,  
+        Forever yours,<br>
         BooBoo 💕
       </p>
     </div>
+
   </div>
 
   <script>
     const rejectBtn = document.getElementById("rejectBtn");
     const acceptBtn = document.getElementById("acceptBtn");
+    const confirmYesBtn = document.getElementById("confirmYesBtn");
+
     const main = document.getElementById("main");
+    const confirm = document.getElementById("confirm");
     const final = document.getElementById("final");
+
+    const pleaMsg = document.getElementById("pleaMsg");
 
     rejectBtn.addEventListener("touchstart", moveButton);
     rejectBtn.addEventListener("mouseover", moveButton);
 
     function moveButton() {
+      pleaMsg.classList.remove("hidden");
+
       const container = document.querySelector(".buttons");
       const maxX = container.offsetWidth - rejectBtn.offsetWidth;
       const maxY = container.offsetHeight - rejectBtn.offsetHeight;
@@ -178,6 +214,11 @@
 
     acceptBtn.addEventListener("click", () => {
       main.style.display = "none";
+      confirm.style.display = "block";
+    });
+
+    confirmYesBtn.addEventListener("click", () => {
+      confirm.style.display = "none";
       final.style.display = "block";
     });
   </script>
